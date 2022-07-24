@@ -1,0 +1,18 @@
+//SPDX-License-Identifier:MIT
+
+pragma solidity ^0.8.7;
+
+contract DonateToCreator {
+    
+    event ethTrasnfer(address _from, address _to, uint256 _ethValue);
+
+    mapping(address => uint256) public balanceOf;
+   
+ 
+    function send(address payable _addr, uint amount) payable public {
+        require(msg.value >= amount);
+        _addr.transfer(msg.value);
+
+        emit ethTrasnfer(msg.sender, _addr, amount);
+    }
+}
